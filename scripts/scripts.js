@@ -44,12 +44,26 @@ export function setupCustomApiComponent() {
     wrapper.style.margin = '20px 0'; // Add some spacing
 
     // Create the input field
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.className = 'custom-input';
-    input.placeholder = 'Enter value here...';
-    input.style.padding = '8px';
-    input.style.marginRight = '10px';
+    const inputName = document.createElement('input');
+    inputName.type = 'text';
+    inputName.className = 'custom-input';
+    inputName.placeholder = 'Enter value here...';
+    inputName.style.padding = '8px';
+    inputName.style.marginRight = '10px';
+
+    const inputEmail = document.createElement('input');
+    inputEmail.type = 'text';
+    inputEmail.className = 'custom-input';
+    inputEmail.placeholder = 'Enter value here...';
+    inputEmail.style.padding = '8px';
+    inputEmail.style.marginRight = '10px';
+
+    const inputMessage = document.createElement('input');
+    inputMessage.type = 'text';
+    inputMessage.className = 'custom-input';
+    inputMessage.placeholder = 'Enter message...';
+    inputMessage.style.padding = '8px';
+    inputMessage.style.marginRight = '10px';
 
     // Create the button
     const button = document.createElement('button');
@@ -57,7 +71,9 @@ export function setupCustomApiComponent() {
     button.textContent = 'Call API';
     button.style.padding = '8px 16px';
 
-    wrapper.appendChild(input);
+    wrapper.appendChild(inputName);
+    wrapper.appendChild(inputEmail);
+    wrapper.appendChild(inputMessage);
     wrapper.appendChild(button);
 
     // Insert at the top of the <main> element (adjust the location as needed)
@@ -67,15 +83,17 @@ export function setupCustomApiComponent() {
     button.addEventListener('click', async (event) => {
       event.preventDefault();
 
-      const inputValue = input.value;
+      const name = inputName.value;
+      const email = inputEmail.value;
+      const message = inputMessage.value;
 
       try {
-        const response = await fetch('http://localhost:5000/api/info', {
+        const response = await fetch('http://localhost:8000/api/info', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ data: inputValue }),
+          body: JSON.stringify({ name, email, message }),
         });
 
         if (response.ok) {
