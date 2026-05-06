@@ -32,6 +32,69 @@ function buildHeroBlock(main) {
 }
 
 /**
+ * Creates and appends the custom input box and button.
+ */
+function setupCustomApiComponent() {
+  const main = document.querySelector('main');
+  
+  // Ensure we only create it once and the main element exists
+  if (main && !document.querySelector('.custom-api-wrapper')) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'custom-api-wrapper';
+    wrapper.style.margin = '20px 0'; // Add some spacing
+
+    // Create the input field
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'custom-input';
+    input.placeholder = 'Enter value here...';
+    input.style.padding = '8px';
+    input.style.marginRight = '10px';
+
+    // Create the button
+    const button = document.createElement('button');
+    button.className = 'button primary';
+    button.textContent = 'Call API';
+    button.style.padding = '8px 16px';
+
+    wrapper.appendChild(input);
+    wrapper.appendChild(button);
+
+    // Insert at the top of the <main> element (adjust the location as needed)
+    main.prepend(wrapper);
+
+    // Attach click event to the button
+    button.addEventListener('click', async (event) => {
+      event.preventDefault();
+      
+      const inputValue = input.value;
+      console.log('Sending data:', inputValue);
+
+      try {
+        const response = await fetch('http://localhost:5000/api/info', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ data: inputValue }),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Success from API:', result);
+          alert('API called successfully!');
+        } else {
+          console.error('API failed with status:', response.status);
+          alert('API call failed.');
+        }
+      } catch (error) {
+        console.error('Error calling local API:', error);
+        alert('Error connecting to the API.');
+      }
+    });
+  }
+}
+/**
  * load fonts.css and set a session storage flag
  */
 async function loadFonts() {
