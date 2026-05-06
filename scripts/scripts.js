@@ -36,7 +36,7 @@ function buildHeroBlock(main) {
  */
 export function setupCustomApiComponent() {
   const main = document.querySelector('main');
-  
+
   // Ensure we only create it once and the main element exists
   if (main && !document.querySelector('.custom-api-wrapper')) {
     const wrapper = document.createElement('div');
@@ -66,7 +66,7 @@ export function setupCustomApiComponent() {
     // Attach click event to the button
     button.addEventListener('click', async (event) => {
       event.preventDefault();
-      
+
       const inputValue = input.value;
 
       try {
