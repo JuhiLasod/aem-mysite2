@@ -34,7 +34,7 @@ function buildHeroBlock(main) {
 /**
  * Creates and appends the custom input box and button.
  */
-function setupCustomApiComponent() {
+export function setupCustomApiComponent() {
   const main = document.querySelector('main');
   
   // Ensure we only create it once and the main element exists
@@ -68,7 +68,6 @@ function setupCustomApiComponent() {
       event.preventDefault();
       
       const inputValue = input.value;
-      console.log('Sending data:', inputValue);
 
       try {
         const response = await fetch('http://localhost:5000/api/info', {
@@ -81,19 +80,23 @@ function setupCustomApiComponent() {
 
         if (response.ok) {
           const result = await response.json();
+          // eslint-disable-next-line no-console
           console.log('Success from API:', result);
           alert('API called successfully!');
         } else {
+          // eslint-disable-next-line no-console
           console.error('API failed with status:', response.status);
           alert('API call failed.');
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error calling local API:', error);
         alert('Error connecting to the API.');
       }
     });
   }
 }
+
 /**
  * load fonts.css and set a session storage flag
  */
@@ -199,6 +202,7 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    setupCustomApiComponent(); // Run the component builder on load
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
