@@ -1,6 +1,7 @@
 .columns > div {
   display: flex;
   flex-direction: column;
+  background-color: blue;
 }
 
 .columns img {
@@ -8,6 +9,12 @@
 }
 
 .columns > div > div {
+  background-color: brown;
+  order: 1;
+}
+
+.columns > div > div > p {
+  background-color: white;
   order: 1;
 }
 

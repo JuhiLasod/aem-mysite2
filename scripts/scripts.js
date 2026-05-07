@@ -12,6 +12,18 @@ import {
   loadCSS,
 } from './aem.js';
 
+function handleWebanixSectionClicks(main) {
+  const sections = main.querySelectorAll('.section.webanix-alert');
+  sections.forEach((section) => {
+    section.style.cursor = 'pointer';
+    section.addEventListener('click', () => {
+      console.log('Section clicked!');
+      alert("You are at webanix")
+      // window.location.href = 'https://www.ambitionbox.com/overview/webanix-solutions-overview';
+    });
+  });
+}
+
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
@@ -95,7 +107,7 @@ export function setupCustomApiComponent() {
           },
           body: JSON.stringify({ name, email, message }),
         });
-
+console.log(`juhii${response}`)
         if (response.ok) {
           const result = await response.json();
           // eslint-disable-next-line no-console
@@ -107,9 +119,11 @@ export function setupCustomApiComponent() {
           alert('API call failed.');
         }
       } catch (error) {
+        console.log(`juhii${response}`)
+
         // eslint-disable-next-line no-console
         console.error('Error calling local API:', error);
-        alert('Error connecting to the API.');
+        alert(`Error connecting to the API.${error}`);
       }
     });
   }
@@ -208,6 +222,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  handleWebanixSectionClicks(document.querySelector('main'));
 }
 
 /**
