@@ -18,7 +18,7 @@ function handleWebanixSectionClicks(main) {
     section.style.cursor = 'pointer';
     section.addEventListener('click', () => {
       console.log('Section clicked!');
-      alert("You are at webanix")
+      alert('You are at webanix');
       // window.location.href = 'https://www.ambitionbox.com/overview/webanix-solutions-overview';
     });
   });
@@ -107,7 +107,6 @@ export function setupCustomApiComponent() {
           },
           body: JSON.stringify({ name, email, message }),
         });
-console.log(`juhii${response}`)
         if (response.ok) {
           const result = await response.json();
           // eslint-disable-next-line no-console
@@ -119,11 +118,9 @@ console.log(`juhii${response}`)
           alert('API call failed.');
         }
       } catch (error) {
-        console.log(`juhii${response}`)
-
         // eslint-disable-next-line no-console
         console.error('Error calling local API:', error);
-        alert(`Error connecting to the API.${error}`);
+        alert('Error connecting to the API.');
       }
     });
   }
