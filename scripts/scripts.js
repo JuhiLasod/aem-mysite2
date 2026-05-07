@@ -44,89 +44,6 @@ function buildHeroBlock(main) {
 }
 
 /**
- * Creates and appends the custom input box and button.
- */
-export function setupCustomApiComponent() {
-  const main = document.querySelector('main');
-
-  // Ensure we only create it once and the main element exists
-  if (main && !document.querySelector('.custom-api-wrapper')) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'custom-api-wrapper';
-    wrapper.style.margin = '20px 0'; // Add some spacing
-
-    // Create the input field
-    const inputName = document.createElement('input');
-    inputName.type = 'text';
-    inputName.className = 'custom-input';
-    inputName.placeholder = 'Enter value here...';
-    inputName.style.padding = '8px';
-    inputName.style.marginRight = '10px';
-
-    const inputEmail = document.createElement('input');
-    inputEmail.type = 'text';
-    inputEmail.className = 'custom-input';
-    inputEmail.placeholder = 'Enter value here...';
-    inputEmail.style.padding = '8px';
-    inputEmail.style.marginRight = '10px';
-
-    const inputMessage = document.createElement('input');
-    inputMessage.type = 'text';
-    inputMessage.className = 'custom-input';
-    inputMessage.placeholder = 'Enter message...';
-    inputMessage.style.padding = '8px';
-    inputMessage.style.marginRight = '10px';
-
-    // Create the button
-    const button = document.createElement('button');
-    button.className = 'button primary';
-    button.textContent = 'Call API';
-    button.style.padding = '8px 16px';
-
-    wrapper.appendChild(inputName);
-    wrapper.appendChild(inputEmail);
-    wrapper.appendChild(inputMessage);
-    wrapper.appendChild(button);
-
-    // Insert at the top of the <main> element (adjust the location as needed)
-    main.prepend(wrapper);
-
-    // Attach click event to the button
-    button.addEventListener('click', async (event) => {
-      event.preventDefault();
-
-      const name = inputName.value;
-      const email = inputEmail.value;
-      const message = inputMessage.value;
-
-      try {
-        const response = await fetch('http://localhost:8000/api/info', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ name, email, message }),
-        });
-        if (response.ok) {
-          const result = await response.json();
-          // eslint-disable-next-line no-console
-          console.log('Success from API:', result);
-          alert('API called successfully!');
-        } else {
-          // eslint-disable-next-line no-console
-          console.error('API failed with status:', response.status);
-          alert('API call failed.');
-        }
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error calling local API:', error);
-        alert('Error connecting to the API.');
-      }
-    });
-  }
-}
-
-/**
  * load fonts.css and set a session storage flag
  */
 async function loadFonts() {
@@ -232,7 +149,6 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
-    setupCustomApiComponent(); // Run the component builder on load
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
