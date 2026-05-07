@@ -2,11 +2,11 @@ async function createTable(jsonURL) {
   const resp = await fetch(jsonURL);
   if (!resp.ok) return null;
   const json = await resp.json();
-  
+
   const table = document.createElement('table');
   const thead = document.createElement('thead');
   const tbody = document.createElement('tbody');
-  
+
   // Create Headers from the first row of data
   const keys = Object.keys(json.data[0]);
   const headerRow = document.createElement('tr');
