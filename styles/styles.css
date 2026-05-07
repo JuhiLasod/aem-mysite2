@@ -326,7 +326,7 @@ main .section.highlight {
 }
 
 .section.special-paragraph  {
-    color: #ff0000  !important;
+    color: red  !important;
     font-size: 60px !important;
     font-weight: bold !important;
 }
@@ -342,6 +342,6 @@ main .section.highlight {
 }
 
 .section.contact-header{
-  color:rgb(130, 0, 252);
+  color:purple;
   font-size: 60px !important;
 }
